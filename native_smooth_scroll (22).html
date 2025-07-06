@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jan Gordon Coaching</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: sans-serif;
+    scroll-behavior: smooth;
+  }
+  section {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 2rem;
+    transition: opacity 1s ease;
+    opacity: 0;
+    padding-top: 16rem;
+    box-sizing: border-box;
+    text-align: left;
+    scroll-margin-top: 16rem;
+  }
+  .container {
+    max-width: 600px;
+    padding: 1rem;
+  }
+  section h1 {
+    font-size: 3rem;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    margin: 0.5rem 0;
+  }
+  section p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    padding: 1rem 0;
+  }
+  section.visible {
+    opacity: 1;
+  }
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 12rem;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    padding-bottom: 1rem;
+    z-index: 1000;
+  }
+  .menu-toggle {
+    background: none;
+    color: white;
+    font-size: 2rem;
+    border: none;
+    cursor: pointer;
+    display: none;
+  }
+  .nav-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .nav-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+  }
+  .nav-subtitle {
+    font-size: 1.25rem;
+    font-weight: normal;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  .nav-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+    padding: 0.5rem;
+  }
+  nav a:hover, nav a.active {
+    color: #ff00ff;
+  }
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      background: rgba(0,0,0,0.9);
+      position: absolute;
+      top: 12rem;
+      left: 0;
+      width: 100%;
+    }
+    .nav-links.show {
+      display: flex;
+    }
+    .menu-toggle {
+      display: block;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <img src="jan.jpg" alt="Portrait of Jan Gordon, Executive Coach" class="nav-photo">
+  <div class="nav-title">Jan Gordon</div>
+  <div class="nav-subtitle">Executive, Career & Personal Coach</div>
+  <button class="menu-toggle">☰</button>
+  <div class="nav-links">
+    <a href="#section1">Possibilities</a>
+    <a href="#section2">Leadership</a>
+    <a href="#section3">About Coaching</a>
+    <a href="#section4">Articles</a>
+  </div>
+</nav>
+
+<section id="section1" style="background: #6a0dad; color: white;">
+  <div class="container">
+    <h1>Possibilities</h1>
+    <p>Welcome to your next step in personal and professional development. Jan Gordon is an executive, career, and personal coach dedicated to helping you achieve clarity, confidence, and meaningful progress in your goals. Whether you are looking to transition careers, enhance leadership skills, or find greater work-life balance, you will discover support and practical tools here for your journey.</p>
+  </div>
+</section>
+
+<section id="section2" style="background: #0d6aad; color: white;">
+  <div class="container">
+    <h1>Leadership & Success</h1>
+    <p>Jan offers personalized coaching sessions, workshops, and strategic planning to support executives, professionals, and individuals seeking change. Services include leadership development, career transitions, goal setting, accountability coaching, and clarity work, ensuring you take actionable steps toward your most important objectives while aligning your goals with your values.</p>
+  </div>
+</section>
+
+<section id="section3" style="background: #ad0d3a; color: white;">
+  <div class="container">
+    <h1>About Coaching</h1>
+    <p>Ready to take the next step? Contact Jan Gordon today to schedule your introductory coaching session or to learn more about coaching services and how they can benefit your personal and professional growth. Your journey towards greater clarity and effectiveness starts with a single conversation.</p>
+  </div>
+</section>
+
+<section id="section4" style="background: #6a0dad; color: white;">
+  <div class="container">
+    <h1>Articles</h1>
+    <p>Welcome to your next step in personal and professional development. Jan Gordon is an executive, career, and personal coach dedicated to helping you achieve clarity, confidence, and meaningful progress in your goals. Whether you are looking to transition careers, enhance leadership skills, or find greater work-life balance, you will discover support and practical tools here for your journey.</p>
+  </div>
+</section>
+
+<script>
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('nav a');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navLinksContainer = document.querySelector('.nav-links');
+
+  menuToggle.addEventListener('click', () => {
+    navLinksContainer.classList.toggle('show');
+  });
+</script>
+
+</body>
+</html>
